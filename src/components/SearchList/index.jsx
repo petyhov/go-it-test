@@ -1,10 +1,5 @@
 import { useSelector } from "react-redux";
-import {
-  getSearchResult,
-  getIsLoading,
-  getIsError,
-  getCurrentPage,
-} from "redux/selectors";
+import { getSearchResult, getIsLoading, getIsError } from "redux/selectors";
 import { Bars } from "react-loader-spinner";
 import SearchItem from "./SearchItem";
 import styles from "./styles.module.scss";
@@ -13,10 +8,6 @@ const SearchList = () => {
   const itemsList = useSelector(getSearchResult);
   const isLoading = useSelector(getIsLoading);
   const isError = useSelector(getIsError);
-  const currentPage = useSelector(getCurrentPage);
-
-  const startIndex = (currentPage - 1) * 3;
-  const finsihIndex = startIndex + 3;
 
   return (
     <section className={styles.section}>
@@ -38,7 +29,7 @@ const SearchList = () => {
         </div>
       ) : itemsList.length > 0 ? (
         <ul>
-          {itemsList.slice(startIndex, finsihIndex).map((item) => (
+          {itemsList.map((item) => (
             <SearchItem data={item} key={item.id} />
           ))}
         </ul>
